@@ -6,13 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
   root: {
     backgroundColor: 'blue',
-    height: '100%',
+    height: '100vh',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center'
   },
   container: {
-    width: '70%',
+    width: '90%',
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
