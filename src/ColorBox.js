@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
+import chroma from 'chroma-js';
 import './ColorBox.css';
 
 class ColorBox extends Component {
@@ -17,6 +18,9 @@ class ColorBox extends Component {
   render() {
     const { name, background, moreUrl, showLink } = this.props;
     const { copied } = this.state;
+    const isDarkedColor = chroma(background).luminance() <= 0.08;
+    const isLightedColor = chroma(background).luminance() >= 0.7;
+
     return (
       <CopyToClipboard text={background} onCopy={this.changeCopyState}>
         <div style={{ background }} className='ColorBox'>
@@ -26,17 +30,23 @@ class ColorBox extends Component {
           ></div>
           <div className={`copy-msg ${copied && 'show'} `}>
             <h1>copied!</h1>
-            <p>{this.props.background}</p>
+            <p className={isLightedColor && 'dark-text'}>
+              {this.props.background}
+            </p>
           </div>
           <div className='copy-container'>
             <div className='box-content'>
-              <span>{name}</span>
+              <span className={isDarkedColor && 'light-text'}>{name}</span>
             </div>
-            <button className='copy-button'>Copy</button>
+            <button className={`copy-button ${isLightedColor && 'dark-text'}`}>
+              Copy
+            </button>
           </div>
           {showLink && (
             <Link to={moreUrl} onClick={e => e.stopPropagation()}>
-              <span className='see-more'>More</span>
+              <span className={`see-more ${isLightedColor && 'dark-text'}`}>
+                MORE
+              </span>
             </Link>
           )}
         </div>
