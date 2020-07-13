@@ -7,6 +7,7 @@ import ColorBox from './ColorBox';
 import PaletteFooter from './PaletteFooter';
 
 import styles from './styles/PaletteStyles';
+import seedColors from './seedColors';
 
 class SingleColorPalette extends Component {
   constructor(props) {
